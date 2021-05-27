@@ -1,4 +1,5 @@
 var readlineSync = require("readline-sync");
+const chalk = require("chalk");
 
 function log(data){
   console.log(data);
@@ -45,23 +46,24 @@ function play({question, answer, options}){
 
   if(userAnswer === answer){
     userScore++;
-    log(correctAnswer);
+    log(chalk.bgWhiteBright.greenBright.bold(correctAnswer));
   } else if (userAnswer === undefined){
-    log("Skipping to next question")
+    log(chalk.bgWhiteBright.cyanBright.bold.italic("Skipping to next question"));
     }
     else {
-    log(wrongAnswer);
+    log(chalk.bgWhiteBright.redBright.bold(wrongAnswer));
   }
-  log("Your current score : "+userScore);
+  log(chalk.bgWhiteBright.cyanBright.bold("Your current score : "+userScore));
+  log(chalk.bgWhiteBright.redBright.bold("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"));
 }
 
 
 var welcomeQuestion = "What is your name? "
-var userName = readlineSync.question(welcomeQuestion);
+var userName = readlineSync.question(chalk.bgWhiteBright.cyanBright.bold(welcomeQuestion));
 
 var welcomeMessage = 'Welcome '+userName+ ' to "Are you the Ultimate Iron Man Fan?"';
 var userScore = 0;
-log(welcomeMessage);
+log(chalk.bgWhiteBright.redBright.bold(welcomeMessage));
 
 for (var i=0; i <questions.length; i++){
   play(questions[i]);
